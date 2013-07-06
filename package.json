@@ -21,5 +21,12 @@
     "middleware"
   ],
   "author": "spion",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/doxout/connect-stack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/doxout/connect-stack/issues"
+  }
 }
