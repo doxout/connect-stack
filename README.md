@@ -1,6 +1,6 @@
 # connect-stack
 
-Stack multiple connect/express middlewares into a single function
+Stack multiple connect/express middlewares into a single middleware function
 
 # example
 
