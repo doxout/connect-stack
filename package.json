@@ -1,0 +1,25 @@
+{
+  "name": "connect-stack",
+  "version": "0.1.0",
+  "description": "Create a new connect middleware function from multiple other middleware functions",
+  "main": "stack.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tap": "~0.4.3"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "keywords": [
+    "connect",
+    "stack",
+    "multiple",
+    "bundle",
+    "middleware"
+  ],
+  "author": "spion",
+  "license": "MIT"
+}
