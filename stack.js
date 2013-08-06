@@ -7,13 +7,13 @@ module.exports = function stack() {
             var fn = callbackList[i++];
             try {
                 if (err && fn) {
-                    // if this function is not an error handler try the next one
+                    // if this function isnt an error handler try the next one
                     if (fn.length < 4)
                         return callbacks(err);
                     // otherwise pass the error to this one
                     fn(err, req, res, callbacks);
                 } else if (fn) {
-                    // no errors - if this function is not an error handler, use it
+                    // no errors? if this function isnt an err handler, use it
                     if (fn.length < 4)
                         return fn(req, res, callbacks);
                     // otherwise try the next function
@@ -24,7 +24,10 @@ module.exports = function stack() {
                 }
             } catch (err) {
                 // an error was thrown? find an error handler.
-                callbacks(err);
+                if (i < callbackList.length)                     
+                    callbacks(err);
+                else 
+                    next(err);
             }
         }
 
