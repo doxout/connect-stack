@@ -1,6 +1,7 @@
+
 module.exports = function stack() {
     var callbackList = [].slice.call(arguments);
-    return function (req, res, next) {
+    function stack(req, res, next) {
         var i = 0;
 
         function callbacks(err) {
@@ -9,28 +10,40 @@ module.exports = function stack() {
                 if (err && fn) {
                     // if this function isnt an error handler try the next one
                     if (fn.length < 4)
-                        return callbacks(err);
+                        callbacks(err);
                     // otherwise pass the error to this one
-                    fn(err, req, res, callbacks);
+                    else 
+                        fn(err, req, res, callbacks);
                 } else if (fn) {
                     // no errors? if this function isnt an err handler, use it
                     if (fn.length < 4)
-                        return fn(req, res, callbacks);
+                        fn(req, res, callbacks);
                     // otherwise try the next function
-                    callbacks();
+                    else
+                        callbacks();
                 } else {
                     // we are out of the stack
                     next(err);
                 }
-            } catch (err) {
+            } catch (err2) {
                 // an error was thrown? find an error handler.
                 if (i < callbackList.length)                     
-                    callbacks(err);
+                    callbacks(err2);
                 else 
-                    next(err);
+                    next(err2);
             }
         }
 
         callbacks();
     }
+
+    stack.push = function(mw) {
+        if (typeof(mw) !== 'function')
+            throw new TypeError("Middleware must be a function");
+        callbackList.push(mw);
+        return stack;
+    }
+
+
+    return stack;
 };
