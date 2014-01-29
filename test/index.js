@@ -38,6 +38,11 @@ t.test('calls all middlewares', function(t) {
     stack(nothing, last)(t, t);
 });
 
+t.test('calls all middlewares in array', function(t) {
+    stack([nothing, last])(t, t);
+});
+
+
 t.test('calls next too', function(t) {
     stack(nothing, nothing)(t, t, next(t));
 });

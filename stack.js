@@ -1,6 +1,8 @@
 
-module.exports = function stack() {
-    var callbackList = [].slice.call(arguments);
+module.exports = function stack(callbackList) {
+    if (!(callbackList instanceof Array))
+        callbackList = [].slice.call(arguments);
+
     function stack(req, res, next) {
         var i = 0;
 
