@@ -14,7 +14,7 @@ function lasterr(err, t, t, next) {
 function err(t, t, next) {
     t.ok(true, 'got through err fn'); 
     next("ERROR"); 
-};
+}
 
 function nothing(t, t, next) { 
     t.ok(true, 'got through nothing fn'); 
@@ -51,6 +51,12 @@ t.test('calls error middleware, skips non-error', function(t) {
     stack(nothing, err, last, lasterr)(t, t);
 });
 
+t.test('calls error middleware wrapped in stack', function(t) {
+    stack(nothing, err, last, stack(lasterr))(t, t, next(t));
+});
+
 t.test('passes error outside', function(t) {
     stack(nothing, err, last)(t, t, next(t, {errors: true}));
 });
+
+

@@ -38,8 +38,7 @@ module.exports = function stack(callbackList) {
         callbackList = [].slice.call(arguments);
 
     var len = 3, stack;
-    if (callbackList[0]) 
-        len = callbackList[0].length;
+    if (callbackList[0]) len = callbackList[0].length;
     
     if (len <= 3) stack = function stack(req, res, next) {
         var callbacks = makeCallbacks(callbackList, req, res, next);
